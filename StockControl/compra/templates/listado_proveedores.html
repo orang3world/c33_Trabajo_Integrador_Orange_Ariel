@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block title %}LISTADO DE PROVEEDORES{% endblock %}
+
+{% block content %}
+<h2>LISTADO DE PROVEEDORES</h2>
+{% for proveedor in proveedores %}
+    <p>{{ proveedor.id }} - {{ proveedor.nombre }}, {{ proveedor.apellido }} - {{ proveedor.dni }}</p>
+{% endfor %}
+{% endblock %}
