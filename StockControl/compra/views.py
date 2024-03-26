@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .models import Producto, Proveedor
 
 # Create your views here.
-''' 
+""" 
 C R U D 
 | | | '────> Delete ──> Productos
 | | |               ──> Proveedores
@@ -15,32 +15,31 @@ C R U D
 |
 '───────X──> Create ──> proveedor
                     ──> producto
-'''
+"""
+
 
 def creacion_proveedor(request, nombre, apellido, dni):
-        nuevo_proveedor = Proveedor.objects.create(
-        nombre = nombre,
-        apellido = apellido,
-        dni = dni
-        )
-        return render(request, 'listado_proveedores.html', {'modelo':'proveedores'})
+    nProVeedor = Proveedor.objects.create(
+        nombre=nombre, apellido=apellido, dni=dni
+    )
+    return listado(request, "proveedores")
 
-
-def creacion_producto(request, nombre, precio, stock_actual, proveedor):
-        nuevo_producto = Producto.objects.create(
+def creacion_producto(request, nombre, precio, stock_actual, pv_id):
+    pV = Proveedor.objects.get(id = pv_id )
+    pV.save()
+    nProDucto = Producto.objects.create(
         nombre = nombre,
         precio = precio,
         stock_actual = stock_actual,
-        proveedor = proveedor
-        )
-        return render(request, 'listado_productos.html', {'modelo':'productos'})
+        proveedor = pV
+    )
+    return listado(request, "productos")
+
 
 def listado(request, modelo):
-    if modelo == 'productos':
+    if modelo == "productos":
         productos = Producto.objects.all()
-        return render(request, 'listado_productos.html', {'productos':productos})
-    elif modelo == 'proveedores':
+        return render(request, "listado_productos.html", {"productos": productos})
+    elif modelo == "proveedores":
         proveedores = Proveedor.objects.all()
-        return render(request, 'listado_proveedores.html', {'proveedores':proveedores})
-
-
+        return render(request, "listado_proveedores.html", {"proveedores": proveedores})
