@@ -4,7 +4,7 @@ from .models import Producto, Proveedor
 # Create your views here.
 """ 
 C R U D 
-| | | '────> Delete ──> Productos
+| | | '─X──> Delete ──> Productos
 | | |               ──> Proveedores
 | | |
 | | '──────> Update ──> Productos
@@ -42,4 +42,15 @@ def listado(request, modelo):
         return render(request, "listado_productos.html", {"productos": productos})
     elif modelo == "proveedores":
         proveedores = Proveedor.objects.all()
+        return render(request, "listado_proveedores.html", {"proveedores": proveedores})
+
+
+def borradoTotal(request, modelo):
+    if modelo == "productos":
+        productos = Producto.objects.all()
+        productos.delete()
+        return render(request, "listado_productos.html", {"productos": productos})
+    elif modelo == "proveedores":
+        proveedores = Proveedor.objects.all()
+        proveedores.delete()
         return render(request, "listado_proveedores.html", {"proveedores": proveedores})
