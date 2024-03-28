@@ -1,5 +1,9 @@
 from django.shortcuts import render
 from .models import Producto, Proveedor
+from django.http import HttpResponseRedirect
+from django.shortcuts import render
+
+from .forms import NameForm, generalForm
 
 # Create your views here.
 """ 
@@ -18,13 +22,13 @@ C R U D
 """
 
 
-def creacion_proveedor(request, nombre, apellido, dni):
+def crear_proveedor(request, nombre, apellido, dni):
     nProVeedor = Proveedor.objects.create(
         nombre=nombre, apellido=apellido, dni=dni
     )
-    return listado(request, "proveedores")
+    return listar(request, "proveedores")
 
-def creacion_producto(request, nombre, precio, stock_actual, pv_id):
+def crear_producto(request, nombre, precio, stock_actual, pv_id):
     pV = Proveedor.objects.get(id = pv_id )
     pV.save()
     nProDucto = Producto.objects.create(
@@ -33,24 +37,39 @@ def creacion_producto(request, nombre, precio, stock_actual, pv_id):
         stock_actual = stock_actual,
         proveedor = pV
     )
-    return listado(request, "productos")
+    return listar(request, "productos")
 
 
-def listado(request, modelo):
-    if modelo == "productos":
+def listar(request, seccion):
+    if seccion == "productos":
         productos = Producto.objects.all()
-        return render(request, "listado_productos.html", {"productos": productos})
-    elif modelo == "proveedores":
+        return render(request, "listar_productos.html", {"productos": productos})
+    elif seccion == "proveedores":
         proveedores = Proveedor.objects.all()
-        return render(request, "listado_proveedores.html", {"proveedores": proveedores})
+        return render(request, "listar_proveedores.html", {"proveedores": proveedores})
 
 
-def borradoTotal(request, modelo):
-    if modelo == "productos":
+def borrarTodo(request, seccion):
+    if seccion == "productos":
         productos = Producto.objects.all()
         productos.delete()
-        return render(request, "listado_productos.html", {"productos": productos})
-    elif modelo == "proveedores":
+        return render(request, "listar_productos.html", {"productos": productos})
+    elif seccion == "proveedores":
         proveedores = Proveedor.objects.all()
         proveedores.delete()
-        return render(request, "listado_proveedores.html", {"proveedores": proveedores})
+        return render(request, "listar_proveedores.html", {"proveedores": proveedores})
+
+
+
+def generalFormView(request):
+    # if this is a POST request we need to process the form data
+    if request.method == "POST":
+        # create a form instance and populate it with data from the request:
+        form = generalForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            return HttpResponseRedirect("/thanks/")
+    return render(request, "form.html", {"form": form})
