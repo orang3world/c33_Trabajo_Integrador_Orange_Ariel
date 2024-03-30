@@ -4,7 +4,27 @@
 
 {% block content %}
 <h2>LISTADO DE PROVEEDORES</h2>
-{% for proveedor in proveedores %}
-    <p>{{ proveedor.id }} - {{ proveedor.nombre }}, {{ proveedor.apellido }} - {{ proveedor.dni }}</p>
-{% endfor %}
+<table class="table table-striped table-light">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">ID</th>
+        <th scope="col">NOMBRE</th>
+        <th scope="col">APELLIDO</th>
+        <th scope="col">DNI</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for proveedor in proveedores %}
+      <tr>
+        <th scope="row">{{ forloop.counter }}</th>
+        <td>{{ proveedor.id }}</td>
+        <td>{{ proveedor.nombre }}</td>
+        <td>{{ proveedor.apellido }} </td>
+        <td>{{ proveedor.dni }}</td>
+      </tr>
+      {% endfor %}
+
+    </tbody>
+  </table>
 {% endblock %}
