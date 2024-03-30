@@ -1,12 +1,15 @@
-{% extends "base.html" %}
-{% load bootstrap %}
-{% block title %}PRODUCTOS{% endblock %}
-{% block content %}
-<h2>CREACION DE PRODUCTOS </h2>
-<form action = "" method = "post"> 
-    {% csrf_token %} 
-        {{ form|bootstrap }}
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form> 
+{% extends 'base.html' %}
+{% block title %}
+  PRODUCTOS
 {% endblock %}
-
+{% block content %}
+  <h2>CREACION DE PRODUCTOS</h2>
+  <div class="form-group">
+    <form action="" method="post">
+      {% csrf_token %}
+      <table class="table table-info">{{ form.as_table }}</table>
+      <br />
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+{% endblock %}
