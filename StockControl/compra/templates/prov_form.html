@@ -1,12 +1,13 @@
 {% extends "base.html" %}
-{% load crispy_forms_tags %}
-
+{% load bootstrap %}
 {% block title %}PROVEEDORES{% endblock %}
-
 {% block content %}
-  <form method="post" novalidate>
+<h2>CREACION DE PROVEEDORES </h2>
+<div class="mb-3">
+  <form action = "" method="post" >
     {% csrf_token %}
-    {{ form|crispy }} 
-    <button type="submit" class="btn btn-success">Save person</button>
+    {{ form|bootstrap }}
+    <button type="submit" class="btn btn-success">Submit</button>
   </form>
+</div>
 {% endblock %}
