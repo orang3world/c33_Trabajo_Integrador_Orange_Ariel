@@ -1,9 +1,9 @@
 from django.shortcuts import render
+
 from .models import Producto, Proveedor
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from .forms import ProductoForm, ProveedorForm
 
-from .forms import NameForm, generalForm
 
 # Create your views here.
 """ 
@@ -21,23 +21,45 @@ C R U D
                     ──> producto
 """
 
-
+'''
 def crear_proveedor(request, nombre, apellido, dni):
     nProVeedor = Proveedor.objects.create(
         nombre=nombre, apellido=apellido, dni=dni
     )
     return listar(request, "proveedores")
 
-def crear_producto(request, nombre, precio, stock_actual, pv_id):
-    pV = Proveedor.objects.get(id = pv_id )
+def crear_producto(request, form):
+    pV = Proveedor.objects.get(id = form.pv_id )
     pV.save()
     nProDucto = Producto.objects.create(
-        nombre = nombre,
-        precio = precio,
-        stock_actual = stock_actual,
+        nombre = form.nombre,
+        precio = form.precio,
+        stock_actual = form.stock_actual,
         proveedor = pV
     )
     return listar(request, "productos")
+'''
+
+
+def crear(request, seccion):
+    if seccion == "productos":
+        if request.method == "POST":
+            form = ProductoForm(request.POST)
+            if form.is_valid():
+                form.save()
+            return listar(request, seccion)
+        else:
+            form = ProductoForm()
+        return render(request, "prod_form.html", {"form": ProductoForm})
+    elif seccion == "proveedores":
+        if request.method == "POST":
+            form = ProveedorForm(request.POST)
+            if form.is_valid():
+                form.save()
+            return listar(request, seccion)
+        else:
+            form = ProveedorForm()
+        return render(request, "prov_form.html", {"form": ProveedorForm})
 
 
 def listar(request, seccion):
@@ -58,18 +80,3 @@ def borrarTodo(request, seccion):
         proveedores = Proveedor.objects.all()
         proveedores.delete()
         return render(request, "listar_proveedores.html", {"proveedores": proveedores})
-
-
-
-def generalFormView(request):
-    # if this is a POST request we need to process the form data
-    if request.method == "POST":
-        # create a form instance and populate it with data from the request:
-        form = generalForm(request.POST)
-        # check whether it's valid:
-        if form.is_valid():
-            # process the data in form.cleaned_data as required
-            # ...
-            # redirect to a new URL:
-            return HttpResponseRedirect("/thanks/")
-    return render(request, "form.html", {"form": form})

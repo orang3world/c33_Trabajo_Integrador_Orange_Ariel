@@ -1,4 +1,5 @@
 from django.db import models
+from django.forms import ModelForm
 
 # Create your models here.
 class Proveedor(models.Model):
@@ -9,7 +10,7 @@ class Proveedor(models.Model):
     def __str__(self):
         return str(self.id)
 
-    
+
 class Producto(models.Model):
     nombre = models.CharField(max_length=100)
     precio = models.FloatField()
