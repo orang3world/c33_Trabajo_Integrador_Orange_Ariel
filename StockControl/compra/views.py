@@ -47,14 +47,3 @@ def listar(request, seccion):
     elif seccion == "proveedores":
         proveedores = Proveedor.objects.all()
         return render(request, "listar_proveedores.html", {"proveedores": proveedores})
-
-
-def borrarTodo(request, seccion):
-    if seccion == "productos":
-        productos = Producto.objects.all()
-        productos.delete()
-        return render(request, "listar_productos.html", {"productos": productos})
-    elif seccion == "proveedores":
-        proveedores = Proveedor.objects.all()
-        proveedores.delete()
-        return render(request, "listar_proveedores.html", {"proveedores": proveedores})
