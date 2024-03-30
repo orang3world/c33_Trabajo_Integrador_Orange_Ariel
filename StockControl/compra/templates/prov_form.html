@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}PROVEEDORES{% endblock %}
+
+{% block content %}
+<h2>CREACION DE PROVEEDORES </h2>
+<form method = "post" action = "" enctype="multipart/form-data"> 
+    {% csrf_token %} 
+    {{form }} 
+    <button>submit</button>
+</form> 
+{% endblock %}
+
