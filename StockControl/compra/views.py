@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 
 from .models import Producto, Proveedor
@@ -19,6 +20,10 @@ C R U D
 '───────X──> Create ──> proveedor
                     ──> producto
 """
+def inicio(request):
+    return render(request,'base.html')
+
+
 def crear(request, seccion):
     if seccion == "productos":
         if request.method == "POST":
