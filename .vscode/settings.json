@@ -1,0 +1,15 @@
+{
+    "html-to-css-autocompletion.autocompletionFilesScope": "multi-root",
+    "html-to-css-autocompletion.triggerCharacters": false,
+    "editor.defaultColorDecorators": false,
+    "editor.defaultFormatter": "solnurkarim.html-to-css-autocompletion",
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "diffEditor.codeLens": true,
+    "editor.quickSuggestions": {
+        "strings": "on"
+    },
+    "editor.suggest.preview": true,
+    "editor.suggest.shareSuggestSelections": true
+}
