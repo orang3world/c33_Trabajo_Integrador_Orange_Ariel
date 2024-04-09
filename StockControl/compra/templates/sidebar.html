@@ -1,0 +1,19 @@
+{% block sidebar %}
+   
+  <div class="d-grid gap-2 col-8 mx-auto">
+    <a href="{{link_crear}}" class="btn btn-outline-info bg-opacity-25" tabindex="-1" role="button" aria-disabled="false">Crear</a>
+    <a href="#" class="btn btn-outline-info bg-opacity-25" tabindex="-1" role="button" aria-disabled="false">Editar</a>
+    <a href="#" class="btn btn-outline-info bg-opacity-25" tabindex="-1" role="button" aria-disabled="false">Borrar</a>
+</div>
+<!--
+  <nav class="navbar bg-body-tertiary">
+    <div class="container-fluid">
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+        <button class="btn btn-outline-success" type="submit">Buscar ID</button>
+      </form>
+    </div>
+  </nav>
+  -->
+  <div>{{ruta}}</div>
+{% endblock %}
