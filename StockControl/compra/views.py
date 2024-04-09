@@ -30,7 +30,7 @@ context = {
 
 
 def inicio(request):
-    return render(request, "base.html", context)
+    return render(request, "index.html", context)
 
 
 def crear_productos(request):
